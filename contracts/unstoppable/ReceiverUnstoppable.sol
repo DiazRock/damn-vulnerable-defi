@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol";
 import "solmate/src/auth/Owned.sol";
 import { UnstoppableVault, ERC20 } from "../unstoppable/UnstoppableVault.sol";
+import  "hardhat/console.sol";
 
 /**
  * @title ReceiverUnstoppable
@@ -35,6 +36,11 @@ contract ReceiverUnstoppable is Owned, IERC3156FlashBorrower {
 
     function executeFlashLoan(uint256 amount) external onlyOwner {
         address asset = address(pool.asset());
+        console.log(
+        "Transferring %s tokens to %s",
+	        amount,
+            msg.sender
+        );
         pool.flashLoan(
             this,
             asset,
