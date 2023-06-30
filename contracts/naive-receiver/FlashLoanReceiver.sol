@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 import "solady/src/utils/SafeTransferLib.sol";
 import "@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol";
 import "./NaiveReceiverLenderPool.sol";
+import  "hardhat/console.sol";
 
 /**
  * @title FlashLoanReceiver
@@ -33,8 +34,7 @@ contract FlashLoanReceiver is IERC3156FlashBorrower {
                 mstore(0x00, 0x48f5c3ed)
                 revert(0x1c, 0x04)
             }
-        }
-        
+        }        
         if (token != ETH)
             revert UnsupportedCurrency();
         
